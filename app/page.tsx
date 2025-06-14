@@ -26,11 +26,13 @@ export default function SocialPage() {
     }
   }, [selectedFormat, uploadedImage])
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (!file) return;
 
     setIsUploading(true);
+    
+    // we don't send raw file, instead a formData. These handles the file type, file name, etc
     const formData = new FormData();
     formData.append("file", file);
 
@@ -62,7 +64,7 @@ export default function SocialPage() {
     // to download image ***
     fetch(imageRef.current.src)
       .then(response => response.blob())
-      .then((blob) => {
+      .then(blob => {
         const url = window.URL.createObjectURL(blob)
         const link = document.createElement("a")
         link.href = url
