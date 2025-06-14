@@ -51,7 +51,6 @@ export default function SocialPage() {
       console.log(error);
     } finally {
       setIsUploading(false);
-      console.log(uploadedImage);
     }
   }
 
